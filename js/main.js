@@ -99,8 +99,11 @@ elSearchForm.addEventListener("submit", evt => {
     evt.preventDefault();
 
     const SearchRegex = new RegExp(elSearch.value.trim(), "gi")
+    const SearchAuthorRegex = new RegExp(elSearchAuthor.value.trim(), "gi")
 
-    const elSearchResut = books.filter(item => item.title.match(SearchRegex) && (item.year >= Number(elSearchYear.value) || elSearchYear.value == "") && (item.author == elSearchAuthor.value || elSearchAuthor.value == "") && (item.language == elSearchLanguage.value || elSearchLanguage.value == ""));
+
+    const elSearchResut = books.filter(item => item.title.match(SearchRegex) && (item.year >= Number(elSearchYear.value) || elSearchYear.value == "") && (item.author.match(SearchAuthorRegex) || elSearchAuthor.value == "") && (item.language == elSearchLanguage.value || elSearchLanguage.value == "all"));
+    
 
     if(elSearchResut.length > 0){
         sortBy(elSearchResut, elSortBy.value)
